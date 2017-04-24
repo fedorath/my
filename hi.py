@@ -65,7 +65,7 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()#finds mean averags from the matrix
 	blobs = d.findBlobs()#scans for objects
 	
-	if settime >= Time:#starts
+	if settime = time.time():#starts
 
 		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
