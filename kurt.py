@@ -66,8 +66,6 @@ while True:#While loop which grabs images until it is told to stop.
 ##########################################{Blob}##########################################
 		
 
-	if settime >= (Stime + Time):
-		Stime = time.time()
 		for root, dirs, files in os.walk(directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
 				Sortfile = sorted(files)[0]
