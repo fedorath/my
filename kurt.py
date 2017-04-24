@@ -53,9 +53,10 @@ def email(Gmail):
 ##########################################################################################################
 
 while True:#While loop which grabs images until it is told to stop.
-	settime = time.time()	
+	settime = time.time()
+	time.sleep(0.1)
         PIC1 = IMG.getImage().toGray()
-	time.sleep(0.5)
+	time.sleep(0.1)
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
         d = (PIC1 - PIC2).binarize(50).invert()
