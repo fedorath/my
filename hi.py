@@ -59,7 +59,7 @@ while True:#While loop which grabs images until it is told to stop.
 	time.sleep(0.1)
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
-        d = (PIC1 - PIC2).binarize(50).invert()
+        d = (PIC1 - PIC2).binarize().invert()
 	
         matrix = d.getNumpy()
         avg = matrix.mean()
@@ -72,33 +72,27 @@ while True:#While loop which grabs images until it is told to stop.
 				Sortfile = sorted(files)[0]
 				mailer = os.path.join(root, Sortfile)
 				email(mailer)#sends image to email function
-
 				
 				
-	if avg >= 10:
-
+	if avg >= 10:#average mean greater equal to 10
 
 		if blobs:
 
 			for b in blobs:
 				try:
-					PIC.drawCircle((b.x,b.y),b.radius(),SimpleCV.Color.GREEN,3)
+					PIC.drawCircle((b.x,b.y),b.radius(),SimpleCV.Color.GREEN,3)#draws green circle around object
 				except:
 					e = sys.exc_info()[0]
 					
 					
 					
-		#use the current date to create a unique file name
-		name = dt.now().strftime(fmt) # filename is set using date and time
-		
-		#initialize the counter variable
-		i = 1
-		#once a unique filename has been found, save the image
-		PIC.save("Photo/Intruder%s-%s.png" % (name, i))
+
+		name = dt.now().strftime(fmt) # filename using date, month, time
 		
 		
-		#prints them into terminal
-		print("Initiating Camera!")
+		i = 1 #counter
+		PIC.save("Photo/Intruder%s-%s.png" % (name, i))#saves file with intruder and the date
+		print("Initiating Camera!")#prints to command line
 
 ##########################################################################################################
 #						The END!					         #
