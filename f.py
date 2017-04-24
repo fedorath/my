@@ -9,7 +9,6 @@
 import SimpleCV*
 import os
 import time
-import shutil
 import smtplib
 import numpy as np
 import uuid
@@ -46,10 +45,11 @@ def email(Gmail):
 ##########################################################################################################
 
 
-IMG = Camera()#Camera is intiated.
+cam = Camera()#Camera is intiated.
 
 display = SimpleCV.Display()
-threshold = 10#Threshold set to 
+threshold = 5#Threshold set to 
+
 Time = 10#Time it takes to send the email
 
 Stime = time.time()
@@ -63,13 +63,13 @@ while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
 
-        img01 = IMG.getImage().toGray()
+        img01 = cam.getImage().toGray()
 
         time.sleep(0.5)
 
-	original = IMG.getImage()
+	original = cam.getImage()
 
-        img02 = IMG.getImage().toGray()
+        img02 = cam.getImage().toGray()
 
         diff = (img01 - img02).binarize(50).invert()
 
