@@ -14,6 +14,16 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
+IMG = Camera()#Camera is intiated.
+width = 640
+height = 480
+directory = "Photo" #Directory name photo
+if not os.path.exists("Photo"):#checks if exists
+	os.makedirs("Photo")#makes directory
+Time = 10 #Time it takes to send the email
+Stime = time.time()
+
 ##########################################################################################################
 #				Sending Attached PNG files to recipient.			         #
 ##########################################################################################################
@@ -41,21 +51,11 @@ def email(Gmail):
 ##########################################################################################################
 #					SimpleCV Object detection.				         #
 ##########################################################################################################
-fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
-IMG = Camera()#Camera is intiated.
-width = 640
-height = 480
-directory = "Photo" #Directory name photo
-if not os.path.exists("Photo"):#checks if exists
-	os.makedirs("Photo")#makes directory
-Time = 10 #Time it takes to send the email
-Stime = time.time()
-
 
 while True:#While loop which grabs images until it is told to stop.
 	settime = time.time()	
         PIC1 = IMG.getImage().toGray()
-	time.sleep(0.5)
+	time.sleep()
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
         d = (PIC1 - PIC2).binarize(50).invert()
