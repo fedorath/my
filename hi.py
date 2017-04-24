@@ -56,15 +56,15 @@ while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
 	PIC = IMG.getImage()#original copy
-        PIC1 = IMG.getImage().toGray()
+        PIC1 = IMG.getImage().toGray()#grayscale conversion
 	time.sleep(0.1)#waits before taking next photo(darker image)
-	PIC2 = IMG.getImage().toGray()
-	time.sleep(0.2)
-        d = (PIC1 - PIC2).binarize(50).invert()
+	PIC2 = IMG.getImage().toGray()#grayscale conversion
+	time.sleep(0.2)#sleeps
+        d = (PIC1 - PIC2).binarize(50).invert()#both images, - ,binarised,inverted.
 
-        matrix = d.getNumpy()
-        avg = matrix.mean()
-	blobs = d.findBlobs()
+        matrix = d.getNumpy()#two values stored in matrix
+        avg = matrix.mean()#finds mean averags from the matrix
+	blobs = d.findBlobs()#scans for objects
 	
 	if settime >= (Stime + Time):
 
@@ -79,15 +79,14 @@ while True:#While loop which grabs images until it is told to stop.
 
 		if blobs:
 
-			for b in blobs:
+			for blob in blobs:
 				try:
-					PIC.drawCircle((b.x,b.y),b.radius(),SimpleCV.Color.GREEN,3)#draws green circle around object
+					PIC.drawCircle((blob.x,blob.y),blob.radius(),SimpleCV.Color.GREEN,3)#draws green circle around object
 				except:
 					e = sys.exc_info()[0]
 					
 		name = dt.now().strftime(fmt) # filename using date, month, time
-		
-		
+
 		i = 1 #counter
 		PIC.save("Photo/Intruder%s-%s.png" % (name, i))#saves file with intruder and the date
 		print("Initiating Camera!")#prints to command line
