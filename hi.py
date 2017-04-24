@@ -66,7 +66,7 @@ while True:#While loop which grabs images until it is told to stop.
         d = (PIC1 - PIC2).binarize(50).invert()
         matrix = d.getNumpy()
         avg = matrix.mean()
-	bs = d.findBlobs()
+	blobs = d.findBlobs()
 	
 	if settime >= (Stime + Time):
 
