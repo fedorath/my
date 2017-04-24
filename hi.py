@@ -18,7 +18,7 @@ IMG = Camera()#Camera is intiated.
 fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
 Time = 10#Time it takes to send the email
 Stime = time.time()
-path = "Photo" #Directory 
+Directory = "Photo" #Directory 
 if not os.path.exists("Photo"):
 	os.makedirs("Photo")
 
@@ -55,11 +55,10 @@ def email(Gmail):
 while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
+	PIC = IMG.getImage()#original copy
         PIC1 = IMG.getImage().toGray()
 	time.sleep(0.1)#waits before taking next photo(darker image)
-	
-	PIC = IMG.getImage()
-        PIC2 = IMG.getImage().toGray()
+	PIC2 = IMG.getImage().toGray()
 	time.sleep(0.2)
         d = (PIC1 - PIC2).binarize(50).invert()
 
@@ -69,9 +68,9 @@ while True:#While loop which grabs images until it is told to stop.
 	
 	if settime >= (Stime + Time):
 
-		for root, dirs, files in os.walk(path):#checks the folder for images
+		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
-				Sortfile = sorted(files)[0]
+				Sortfile = sorted(files)[0]#sorts the images
 				mailer = os.path.join(root, Sortfile)
 				email(mailer)#sends image to email function
 				
@@ -86,9 +85,6 @@ while True:#While loop which grabs images until it is told to stop.
 				except:
 					e = sys.exc_info()[0]
 					
-					
-					
-
 		name = dt.now().strftime(fmt) # filename using date, month, time
 		
 		
