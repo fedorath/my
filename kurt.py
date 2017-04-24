@@ -49,14 +49,13 @@ directory = "Photo" #Directory name photo
 if not os.path.exists("Photo"):#checks if exists
 	os.makedirs("Photo")#makes directory
 Time = 10 #Time it takes to send the email
-sleep = 0.5
 Stime = time.time()
 
 
 while True:#While loop which grabs images until it is told to stop.
 	settime = time.time()	
         PIC1 = IMG.getImage().toGray()
-	time.sleep(sleep)
+	time.sleep(0.5)
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
         d = (PIC1 - PIC2).binarize(50).invert()
