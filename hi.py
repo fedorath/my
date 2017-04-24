@@ -94,7 +94,7 @@ while True:#While loop which grabs images until it is told to stop.
 		#initialize the counter variable
 		i = 1
 		#once a unique filename has been found, save the image
-		PIC.save("Photo/motion%s-%s.png" % (name, i))
+		PIC.save('Photo/Intruder.png','PNG'% (name, i))
 		
 		
 		#prints them into terminal
