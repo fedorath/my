@@ -107,8 +107,6 @@ while True:#While loop which grabs images until it is told to stop.
 		
 		#prints them into terminal
 		print("Initiating Camera!")
-		print ("Processing %s...") 
-		print ("Intruder Image Stored!")
 
 ##########################################################################################################
 #						The END!					         #
