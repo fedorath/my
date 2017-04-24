@@ -56,11 +56,12 @@ while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
         PIC1 = IMG.getImage().toGray()
-	time.sleep(0.1)
+	time.sleep(0.1)#waits before taking next photo(darker image)
+	
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
-        d = (PIC1 - PIC2).binarize().invert()
-	
+        Image = (PIC1 - PIC2)#
+	d = (Image).binarize().invert()
         matrix = d.getNumpy()
         avg = matrix.mean()
 	blobs = d.findBlobs()
