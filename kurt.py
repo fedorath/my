@@ -49,7 +49,7 @@ directory = "Photo" #Directory name photo
 if not os.path.exists("Photo"):#checks if exists
 	os.makedirs("Photo")#makes directory
 Time = 10 #Time it takes to send the email
-sleep = 0.2
+sleep = 0.5
 Stime = time.time()
 
 
