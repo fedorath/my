@@ -73,7 +73,7 @@ while True:#While loop which grabs images until it is told to stop.
         img02 = cam.getImage().toGray()
 
         diff = (img01 - img02).binarize(50).invert()
-
+	diff.show()
 
         matrix = diff.getNumpy()
         mean = matrix.mean()
