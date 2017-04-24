@@ -59,7 +59,7 @@ while True:#While loop which grabs images until it is told to stop.
 	time.sleep(sleep)
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
-        d = (PIC1 - PIC2).binarize().invert()
+        d = (PIC1 - PIC2).binarize(50).invert()
         matrix = d.getNumpy()
         avg = matrix.mean()
 	bs = d.findBlobs()
