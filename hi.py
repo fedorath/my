@@ -60,6 +60,7 @@ while True:#While loop which grabs images until it is told to stop.
 	
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
+	time.sleep(1)
         d = (PIC1 - PIC2).binarize().invert()
 
         matrix = d.getNumpy()
