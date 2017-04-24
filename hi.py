@@ -66,7 +66,7 @@ while True:#While loop which grabs images until it is told to stop.
 	blobs = d.findBlobs()#scans for objects
 	
 	if settime >= (Stime + Time):#starts
-		start_time = time.time()
+		Stime = time.time()
 		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
 				Sortfile = sorted(files)[0]#sorts the images
