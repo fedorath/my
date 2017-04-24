@@ -15,13 +15,12 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 IMG = Camera()#Camera is intiated.
-fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
 Time = 10#Time it takes to send the email
 Stime = time.time()
-Directory = "Photo" #Directory 
-if not os.path.exists("Photo"):
-	os.makedirs("Photo")
-
+Directory = "Photo" #Directory named photo
+if not os.path.exists("Photo"):#create a new directory
+	os.makedirs("Photo")#names it photo
+fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
 
 ##########################################################################################################
 #				Sending Attached PNG files to recipient.			         #
@@ -88,7 +87,7 @@ while True:#While loop which grabs images until it is told to stop.
 		name = dt.now().strftime(fmt) # filename using date, month, time
 
 		i = 1 #counter
-		PIC.save("Photo/Intruder%s-%s.png" % (name, i))#saves file with intruder and the date
+		PIC.save("Photo/Intruder%s.png" % (name, i))#saves file with intruder and the date
 		print("Initiating Camera!")#prints to command line
 
 ##########################################################################################################
