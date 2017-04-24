@@ -62,7 +62,18 @@ while True:#While loop which grabs images until it is told to stop.
         matrix = d.getNumpy()
         avg = matrix.mean()
 	bs = d.findBlobs()
-##########################################{Blob}##########################################	
+##########################################{Blob}##########################################
+		
+
+	if settime >= (Stime + Time):
+		Stime = time.time()
+		for root, dirs, files in os.walk(directory, topdown=False):#checks the folder for images
+			for file in files:#finds the image
+				Sortfile = sorted(files)[0]
+				mailer = os.path.join(root, Sortfile)
+				email(mailer)#sends image to email function
+
+
 	if avg >= 10: #average mean greater equal to 10
 		if bs:
 			for blob in bs:
@@ -86,15 +97,7 @@ while True:#While loop which grabs images until it is told to stop.
 	print("Initiating Camera!")
 	print ("Processing %s...") 
 	print ("Intruder Image Stored!")
-		
 
-	if settime >= (Stime + Time):
-		Stime = time.time()
-		for root, dirs, files in os.walk(directory, topdown=False):#checks the folder for images
-			for file in files:#finds the image
-				Sortfile = sorted(files)[0]
-				mailer = os.path.join(root, Sortfile)
-				email(mailer)#sends image to email function
 				
 	
 					
