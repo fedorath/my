@@ -44,10 +44,8 @@ def email(Gmail):
 #					SimpleCV Object detection.				         #
 ##########################################################################################################
 
+cam = Camera(prop_set={"width":300,"height":300})
 
-cam = Camera()#Camera is intiated.
-
-display = SimpleCV.Display()
 threshold = 5#Threshold set to 
 
 Time = 10#Time it takes to send the email
