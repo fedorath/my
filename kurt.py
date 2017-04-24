@@ -9,12 +9,12 @@ import os
 import time
 from SimpleCV import *
 import smtplib
-from datetime import datetime as dt
+#from datetime import datetime as dt
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
+#fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
 IMG = Camera()#Camera is intiated.
 width = 640
 height = 480
@@ -85,7 +85,8 @@ while True:#While loop which grabs images until it is told to stop.
 
 
 
-	name = dt.now().strftime(fmt) # filename is set using date and time
+	#name = dt.now().strftime(fmt) # filename is set using date and time
+	timestr = time.strftime("%Y%m%d-%H%M%S")
 	i = 1
 	while os.path.exists("Photo/Intruder%s-%s.png" % (name, i)):
 		i += 1
