@@ -77,7 +77,7 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()
 
 
-	blobs = d.findBlobs()
+	bs = d.findBlobs()
 
 	if settime >= (Stime + Time):
 
@@ -92,14 +92,13 @@ while True:#While loop which grabs images until it is told to stop.
 	if avg >= 10:
 
 
-		if blobs:
-
-			for b in blobs:
-				try:
-					loc = (b.x,b.y) 
-					original.drawCircle(loc,b.radius(),Color.RED,2)
-				except:
+		if bs:
+			for blob in bs:
+				try: #Draws green circles around the detected objects
+					PIC.drawCircle((blob.x,blob.y),blob.radius(),SimpleCV.Color.GREEN,3)
+				except Exception:
 					e = sys.exc_info()[0]
+
 					
 					
 					
