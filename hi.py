@@ -66,7 +66,7 @@ while True:#While loop which grabs images until it is told to stop.
 
         time.sleep(0.5)
 
-	PH = IMG.getImage()
+	original = IMG.getImage()
 
         img02 = IMG.getImage().toGray()
 
@@ -77,7 +77,7 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()
 
 
-	bs = d.findBlobs()
+	blobs = d.findBlobs()
 
 	if settime >= (Stime + Time):
 
@@ -92,13 +92,14 @@ while True:#While loop which grabs images until it is told to stop.
 	if avg >= 10:
 
 
-		if bs:
-			for blob in bs:
-				try: #Draws green circles around the detected objects
-					PIC.drawCircle((blob.x,blob.y),blob.radius(),SimpleCV.Color.GREEN,3)
-				except Exception:
-					e = sys.exc_info()[0]
+		if blobs:
 
+			for b in blobs:
+				try:
+					loc = (b.x,b.y) 
+					original.drawCircle(loc,b.radius(),Color.RED,2)
+				except:
+					e = sys.exc_info()[0]
 					
 					
 					
@@ -113,7 +114,7 @@ while True:#While loop which grabs images until it is told to stop.
 			#if it does, add one to the filename and try again
 			i += 1
 		#once a unique filename has been found, save the image
-		PH.save("Photo/motion%s-%s.png" % (timestr, i))
+		original.save("Photo/motion%s-%s.png" % (timestr, i))
 		
 		print("Motion Detected")
 ##########################################################################################################
