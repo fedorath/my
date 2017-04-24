@@ -50,8 +50,12 @@ if not os.path.exists("Photo"):#checks if exists
 	os.makedirs("Photo")#makes directory
 Time = 10 #Time it takes to send the email
 sleep = 0.2
+display = SimpleCV.Display()
 Stime = time.time()
-	
+
+normaldisplay = True
+
+
 while True:#While loop which grabs images until it is told to stop.
 	settime = time.time()	
         PIC1 = IMG.getImage().toGray()
@@ -61,11 +65,11 @@ while True:#While loop which grabs images until it is told to stop.
         d = (PIC1 - PIC2).binarize().invert()
         matrix = d.getNumpy()
         avg = matrix.mean()
-	b = d.findBlobs()
+	bs = d.findBlobs()
 ##########################################{Blob}##########################################	
 	if avg >= 10: #average mean greater equal to 10
-		if b:
-			for blob in b:
+		if bs:
+			for blob in bs:
 				try: #Draws green circles around the detected objects
 					PIC.drawCircle((blob.x,blob.y),b.radius(),SimpleCV.Color.GREEN,3)
 				except Exception:
