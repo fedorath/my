@@ -48,7 +48,9 @@ def email(Gmail):
 
 cam = Camera()
 display = Display((800,600)
-threshold = 5.0 #Threshold set to 
+		  
+threshold = 5.0
+		  #Threshold set to 
 
 Time = 10 #Time it takes to send the email
 
