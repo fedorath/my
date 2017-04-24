@@ -53,7 +53,7 @@ def email(Gmail):
 	
 while True:#While loop which grabs images until it is told to stop.
 
-        settime = time.time()
+        #settime = time.time()#time resets when loop
 	PIC = IMG.getImage()#original copy
         PIC1 = IMG.getImage().toGray()#grayscale conversion
 	time.sleep(0.1)#waits before taking next photo(darker image)
@@ -65,13 +65,13 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()#finds mean averags from the matrix
 	blobs = d.findBlobs()#scans for objects
 	
-	if settime >= (Stime + Time):
+	#if settime >= (Stime + Time):#starts
 
-		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
-			for file in files:#finds the image
-				Sortfile = sorted(files)[0]#sorts the images
-				mailer = os.path.join(root, Sortfile)
-				email(mailer)#sends image to email function
+	for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
+		for file in files:#finds the image
+			Sortfile = sorted(files)[0]#sorts the images
+			mailer = os.path.join(root, Sortfile)
+			email(mailer)#sends image to email function
 				
 				
 	if avg >= 10:#average mean greater equal to 10
@@ -87,7 +87,7 @@ while True:#While loop which grabs images until it is told to stop.
 		name = dt.now().strftime(fmt) # filename using date, month, time
 
 		i = 1 #counter
-		PIC.save("Photo/Intruder%s.png" % (name, i))#saves file with intruder and the date
+		PIC.save("Photo/Intruder%s-%s.png" % (name, i))#saves file with intruder and the date
 		print("Initiating Camera!")#prints to command line
 
 ##########################################################################################################
