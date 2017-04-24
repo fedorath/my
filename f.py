@@ -47,7 +47,7 @@ def email(Gmail):
 ##########################################################################################################
 
 cam = Camera()
-display = Display((800,600)
+display = Display((800,600))
 		  
 threshold = 5.0
 		  #Threshold set to 
