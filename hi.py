@@ -15,8 +15,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 IMG = Camera()#Camera is intiated.
-Time = 10#Time it takes to send the email
-Stime = time.time()
 Directory = "Photo" #Directory named photo
 if not os.path.exists("Photo"):#create a new directory
 	os.makedirs("Photo")#names it photo
@@ -53,7 +51,7 @@ def email(Gmail):
 	
 while True:#While loop which grabs images until it is told to stop.
 
-        settime = time.time()#time resets when loop
+        Time = time.time()#time resets when loop
 	PIC = IMG.getImage()#original copy
         PIC1 = IMG.getImage().toGray()#grayscale conversion
 	time.sleep(0.1)#waits before taking next photo(darker image)
@@ -65,7 +63,7 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()#finds mean averags from the matrix
 	blobs = d.findBlobs()#scans for objects
 	
-	if settime >= time.time():#starts
+	if Time >= time.time():#starts
 
 		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
