@@ -44,7 +44,7 @@ def email(Gmail):
 
 
 IMG = Camera()#Camera is intiated.
-
+fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
 width = 640
 height = 480
 Time = 10#Time it takes to send the email
@@ -92,19 +92,24 @@ while True:#While loop which grabs images until it is told to stop.
 					
 					
 		#use the current date to create a unique file name
-		timestr = time.strftime("%Y%m%d-%H%M%S")
+		name = dt.now().strftime(fmt) # filename is set using date and time
 		
 		#initialize the counter variable
 		i = 1
 		
 		#check to see if the filename already exists
-		while os.path.exists("Photo/motion%s-%s.png" % (timestr, i)):
+		while os.path.exists("Photo/motion%s-%s.png" % (name, i)):
 			#if it does, add one to the filename and try again
 			i += 1
 		#once a unique filename has been found, save the image
-		PIC.save("Photo/motion%s-%s.png" % (timestr, i))
+		PIC.save("Photo/motion%s-%s.png" % (name, i))
 		
-		print("Motion Detected")
+		
+		#prints them into terminal
+		print("Initiating Camera!")
+		print ("Processing %s...") 
+		print ("Intruder Image Stored!")
+
 ##########################################################################################################
 #						The END!					         #
 ##########################################################################################################
