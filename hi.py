@@ -8,8 +8,10 @@
 import os
 import time
 from SimpleCV import *
+import shutil
 import smtplib
-from datetime import datetime as dt
+import numpy as np
+import uuid
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -38,81 +40,69 @@ def email(Gmail):
         s.sendmail('kurtax.h1@googlemail.com','kurtax.h1@googlemail.com', msg.as_string())#Sending email
         s.close()#Closes
 	
-#initialize the camer
-cam = Camera()
-#set the max display size
-display = Display((400,400))
+##########################################################################################################
+#					SimpleCV Object detection.				         #
+##########################################################################################################
 
-#create a threshold variable to change  motion sensitivity
-threshold = 5.0
 
-#set timer variables for email loop
-start_time = time.time()
-wait_time = 60 #in seconds
+IMG = Camera()#Camera is intiated.
 
-#set a streaming variable to stream webcam online
-streaming = JpegStreamer("0.0.0.0:1212")
+width = 640
+height = 480
+Time = 10#Time it takes to send the email
 
-#create destination & backup directories for the pictures
-dst = "pic" #destination directory for images
-bkp = "pic_bkp" #backup  directory for images
+Stime = time.time()
 
-#if the picture directories don't exist, create them
-if not os.path.exists("pic"):
-	os.makedirs("pic")
-if not os.path.exists("pic_bkp"):
-	os.makedirs("pic_bkp")
+path = "Photo" #Directory 
+if not os.path.exists("Photo"):
+	os.makedirs("Photo")
 
-#create a loop that constantly grabs new images from the webcam
-while True:
-        #set a time variable that updates with the loop
-        current_time = time.time()
-        #grab an image still from the camera and convert it to grayscale
-        img01 = cam.getImage().toGray()
-        #wait half a second
+	
+while True:#While loop which grabs images until it is told to stop.
+
+        settime = time.time()
+
+        img01 = IMG.getImage().toGray()
+
         time.sleep(0.5)
-	#grab an unedited still to use as our original image
-	original = cam.getImage()
-        #grab another image still from the camera and conver it to grayscale
-        img02 = cam.getImage().toGray()
-        #subract the images from each other, binarize and inver the colors
-        diff = (img01 - img02).binarize(50).invert()
 
-        #dump all the values into a Numpy matrix and extract the mean avg
-        matrix = diff.getNumpy()
-        mean = matrix.mean()
+	PH = IMG.getImage()
 
-	#find and highlight the objects within the image
-	blobs = diff.findBlobs()
+        img02 = IMG.getImage().toGray()
 
-        #check to see if the wait time has been passed
-	if current_time >= (start_time + wait_time):
-		#if it has, reset the start time
-		start_time = time.time()
-		#scan the picture directory for files
-		for root, dirs, files in os.walk(dst):
-			dst_root = root.replace(dst, bkp)
-			#if a file is found in the picture directory, send it to email
-			if files:
-				firstfile = sorted(files)[0]
-				img_mailer = os.path.join(root, firstfile)
-				email(img_mailer)
-			#move any files in the pic directory to the backup directory
+        d = (img01 - img02).binarize(50).invert()
 
 
-        #if the mean is greater than our threshold variable, then look for objects
-	if mean >= threshold:
+        matrix = d.getNumpy()
+        avg = matrix.mean()
 
-		#check to see if any objects were detected
+
+	blobs = d.findBlobs()
+
+	if settime >= (Stime + Time):
+
+		for root, dirs, files in os.walk(path):#checks the folder for images
+			for file in files:#finds the image
+				Sortfile = sorted(files)[0]
+				mailer = os.path.join(root, Sortfile)
+				email(mailer)#sends image to email function
+
+				
+				
+	if avg >= 10:
+
+
 		if blobs:
-			#find the central point of each object
-			#and draw a red circle around it
+
 			for b in blobs:
 				try:
-					loc = (b.x,b.y) #locates center of object
-					original.drawCircle(loc,b.radius(),Color.GREEN,2)
+					loc = (b.x,b.y) 
+					original.drawCircle(loc,b.radius(),Color.RED,2)
 				except:
 					e = sys.exc_info()[0]
+					
+					
+					
 		#use the current date to create a unique file name
 		timestr = time.strftime("%Y%m%d-%H%M%S")
 		
@@ -120,10 +110,13 @@ while True:
 		i = 1
 		
 		#check to see if the filename already exists
-		while os.path.exists("pic/motion%s-%s.png" % (timestr, i)):
+		while os.path.exists("Photo/motion%s-%s.png" % (timestr, i)):
 			#if it does, add one to the filename and try again
 			i += 1
 		#once a unique filename has been found, save the image
-		original.save("pic/motion%s-%s.png" % (timestr, i))
-		#print results to terminal
+		PH.save("Photo/motion%s-%s.png" % (timestr, i))
+		
 		print("Motion Detected")
+##########################################################################################################
+#						The END!					         #
+##########################################################################################################
