@@ -6,7 +6,7 @@
 
 #Multiple imports
 
-import SimpleCV*
+import SimpleCV
 import os
 import time
 import smtplib
