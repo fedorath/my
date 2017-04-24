@@ -5,9 +5,10 @@
 ##########################################################################################################
 
 #Multiple imports
+
+import SimpleCV*
 import os
 import time
-from SimpleCV import *
 import shutil
 import smtplib
 import numpy as np
