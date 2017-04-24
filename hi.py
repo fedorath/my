@@ -14,14 +14,10 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-IMG = Camera()#Camera is intiated.
+IMG = Camera(prop_set={'width':640, 'height':480}))#Camera is intiated.
 fmt = "%Y-%m-%d %H-%M-%S"#Date,Month,Year,Hour,Minute,Seconds
-width = 640
-height = 480
 Time = 10#Time it takes to send the email
-
 Stime = time.time()
-
 path = "Photo" #Directory 
 if not os.path.exists("Photo"):
 	os.makedirs("Photo")
