@@ -16,6 +16,19 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+cam = Camera(prop_set={"width":300,"height":300})
+
+threshold = 5#Threshold set to 
+
+Time = 10#Time it takes to send the email
+
+Stime = time.time()
+
+path = "Photo" #Directory 
+if not os.path.exists("Photo"):
+	os.makedirs("Photo")
+
+
 ##########################################################################################################
 #				Sending Attached PNG files to recipient.			         #
 ##########################################################################################################
@@ -44,19 +57,7 @@ def email(Gmail):
 #					SimpleCV Object detection.				         #
 ##########################################################################################################
 
-cam = Camera(prop_set={"width":300,"height":300})
 
-threshold = 5#Threshold set to 
-
-Time = 10#Time it takes to send the email
-
-Stime = time.time()
-
-path = "Photo" #Directory 
-if not os.path.exists("Photo"):
-	os.makedirs("Photo")
-
-	
 while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
