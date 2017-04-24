@@ -60,6 +60,7 @@ while True:#While loop which grabs images until it is told to stop.
 	PIC = IMG.getImage()
         PIC2 = IMG.getImage().toGray()
         d = (PIC1 - PIC2).binarize(50).invert()
+	
         matrix = d.getNumpy()
         avg = matrix.mean()
 	blobs = d.findBlobs()
@@ -92,11 +93,6 @@ while True:#While loop which grabs images until it is told to stop.
 		
 		#initialize the counter variable
 		i = 1
-		
-		#check to see if the filename already exists
-		while os.path.exists("Photo/motion%s-%s.png" % (name, i)):
-			#if it does, add one to the filename and try again
-			i += 1
 		#once a unique filename has been found, save the image
 		PIC.save("Photo/motion%s-%s.png" % (name, i))
 		
