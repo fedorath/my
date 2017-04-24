@@ -8,10 +8,8 @@
 import os
 import time
 from SimpleCV import *
-import shutil
 import smtplib
-import numpy as np
-import uuid
+from datetime import datetime as dt
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -61,24 +59,15 @@ if not os.path.exists("Photo"):
 while True:#While loop which grabs images until it is told to stop.
 
         settime = time.time()
-
-        img01 = IMG.getImage().toGray()
-
-        time.sleep(0.5)
-
-	original = IMG.getImage()
-
-        img02 = IMG.getImage().toGray()
-
-        d = (img01 - img02).binarize(50).invert()
-
-
+        PIC1 = IMG.getImage().toGray()
+	time.sleep(0.1)
+	PIC = IMG.getImage()
+        PIC2 = IMG.getImage().toGray()
+        d = (PIC1 - PIC2).binarize(50).invert()
         matrix = d.getNumpy()
         avg = matrix.mean()
-
-
-	blobs = d.findBlobs()
-
+	bs = d.findBlobs()
+	
 	if settime >= (Stime + Time):
 
 		for root, dirs, files in os.walk(path):#checks the folder for images
@@ -96,7 +85,7 @@ while True:#While loop which grabs images until it is told to stop.
 
 			for b in blobs:
 				try:
-					original.drawCircle((b.x,b.y),b.radius(),SimpleCV.Color.GREEN,3)
+					PIC.drawCircle((b.x,b.y),b.radius(),SimpleCV.Color.GREEN,3)
 				except:
 					e = sys.exc_info()[0]
 					
@@ -113,7 +102,7 @@ while True:#While loop which grabs images until it is told to stop.
 			#if it does, add one to the filename and try again
 			i += 1
 		#once a unique filename has been found, save the image
-		original.save("Photo/motion%s-%s.png" % (timestr, i))
+		PIC.save("Photo/motion%s-%s.png" % (timestr, i))
 		
 		print("Motion Detected")
 ##########################################################################################################
