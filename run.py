@@ -11,26 +11,38 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+def gmail(png_file):
+	#add your gmail address and get your stored gmail password from keyring
+	gmail_acct = "kurtax.h1@googlemail.com"
 
-def email(Gmail):
+	app_spec_pwd = "kurtax%1"
 
-	img_data = open(Gmail, 'rb').read()
-        msg = MIMEMultipart('mixed')
-        msg['Subject'] = 'Important Message!'#subject title
-        msg['From'] = 'kurtax.h1@googlemail.com'
-        msg['Reply-to'] = ', '.join('kurtax.h1@googlemail.com')
-        text = MIMEText("Intruder has been spotted!")#email body text
-        msg.attach(text)#attach body text
-        image = MIMEImage(img_data, name=os.path.basename(Gmail))
-        msg.attach(image)#attaches img
+	#create variables for the "to" and "from" email addresses
+	TO = ["kurtax.h1@googlemail.com"]
+	FROM = "kurtax.h1@googlemail.com"
 
-        s = smtplib.SMTP('smtp.gmail.com', 587)#SMTP server connection
-        s.ehlo()
-        s.starttls()#Starts transport layer security
-        s.ehlo#Extended hello command
-        s.login('kurtax.h1@googlemail.com', 'kurtax%1')#Login Details
-        s.sendmail('kurtax.h1@googlemail.com','kurtax.h1@googlemail.com', msg.as_string())#Sending email
-        s.close()#Closes
+	#asemble the message as "MIMEMultipart" mixed
+	msg = MIMEMultipart('mixed')
+	msg['Subject'] = 'Intruder Alert!'
+	msg['From'] = FROM
+	msg['To'] = ', '.join(TO)
+	body = MIMEText('Motion was detected on your security camera.', 'plain')
+	msg.attach(body)
+
+	#open up an image file and attach it to the message
+	img_data = open(png_file, 'rb')
+	image = MIMEImage(img_data.read())
+	img_data.close()
+	msg.attach(image)
+
+	#open up the SMTP server, start a tls connection, login, send, and close
+	server = smtplib.SMTP('smtp.gmail.com', 587)
+	server.ehlo()
+	server.starttls()
+	server.ehlo
+	server.login(gmail_acct, app_spec_pwd)
+	server.sendmail(FROM, TO, msg.as_string())
+	server.close()
 	
 #initialize the camer
 cam = Camera()
@@ -86,7 +98,7 @@ while True:
 			for file in files:#finds the image
 				Sortfile = sorted(files)[0]#sorts the images
 				mailer = os.path.join(root, Sortfile)
-				email(mailer)#sends image to email function
+				gmail(mailer)#sends image to email function
 
         #if the mean is greater than our threshold variable, then look for objects
 	if mean >= threshold:
