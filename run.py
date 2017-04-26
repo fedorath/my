@@ -1,10 +1,15 @@
 #!/usr/bin/python
 
 #import the SimpleCV, shutil and the custom  py_gmailer  libraries
+#Multiple imports
+import os
+import time
 from SimpleCV import *
-import py_gmailer
-import shutil
-
+import smtplib
+from datetime import datetime as dt
+from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 def email(Gmail):
@@ -111,5 +116,3 @@ while True:
 		#print results to terminal
 		print("Motion Detected")
 
-	#send the current image to the webcam stream
-	original.save(streaming)
