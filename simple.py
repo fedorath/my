@@ -14,6 +14,7 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 Time_pause = 30
+start = time.time()
 IMG = Camera()#Camera is intiated.
 Directory = "Photo" #Directory named photo
 if not os.path.exists("Photo"):#create a new directory
@@ -63,7 +64,7 @@ while True:#While loop which grabs images until it is told to stop.
         avg = matrix.mean()#finds mean averags from the matrix
 	blobs = d.findBlobs()#scans for objects
 	
-	if Time >= (time + Time_pause):#starts
+	if Time >= (time + start):#starts
 
 		for root, dirs, files in os.walk(Directory, topdown=False):#checks the folder for images
 			for file in files:#finds the image
