@@ -94,7 +94,7 @@ while True:
 		#if it has, reset the start time
 		start_time = time.time()
 		#scan the picture directory for files
-		for root, dirs, files in os.walk(dst, topdown=True):#checks the folder for images
+		for root, dirs, files in os.walk(dst):#checks the folder for images
 			for file in files:#finds the image
 				Sortfile = sorted(files)[0]#sorts the images
 				mailer = os.path.join(root, Sortfile)
