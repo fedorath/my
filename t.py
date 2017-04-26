@@ -56,7 +56,6 @@ while True:#While loop which grabs images until it is told to stop.
         PIC1 = IMG.getImage().toGray()#grayscale conversion
 	time.sleep(0.1)#waits before taking next photo(darker image)
 	PIC2 = IMG.getImage().toGray()#grayscale conversion
-	time.sleep(0.2)#sleeps
         d = (PIC1 - PIC2).binarize(50).invert()#both images, - ,binarised,inverted.
 
         matrix = d.getNumpy()#two values stored in matrix
